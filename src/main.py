@@ -7,7 +7,7 @@ def main():
     mcp_tool_manager = McpServersRegistry()
     anyio.run(mcp_tool_manager.initialize)
 
-    mcp_tool_manager.get_registry().run(transport="streamable-http", host="localhost", port=5556)
+    mcp_tool_manager.get_registry().run(transport="streamable-http", host="localhost", port=5555)
 
 
 if __name__ == "__main__":
