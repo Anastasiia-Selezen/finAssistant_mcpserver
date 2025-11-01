@@ -5,7 +5,7 @@ Financial AI Assistant MCP Server combines several financial data sources behind
 ## Features
 
 - Unified MCP registry that exposes Alpha Vantage market data, SEC filings, and a reusable financial-analysis prompt.
-- Streamable HTTP transport on `localhost:5556` for integration with MCP-compatible clients.
+- Streamable HTTP transport on `localhost:5555` for integration with MCP-compatible clients.
 
 
 ## Requirements
@@ -32,17 +32,17 @@ The server loads settings from environment variables (optionally via a `.env` fi
 | `SEC_API_KEY` | sec-api.io key used by `SECClient`. |
 
 
-Create a `.env` file in the project root or export them in your shell before running the server.
+Rename `.env.example` file to `.env` file in the project root and add your API keys or export them in your shell before running the server.
 
 ## Running the MCP Server
 
 Start the registry locally:
 
 ```bash
-uv run python -m src.main
+uv run src/main.py
 ```
 
-By default the FastMCP registry listens on `streamable-http://localhost:5556`.
+By default the FastMCP registry listens on `streamable-http://localhost:5555`.
 
 ## Available MCP Tools
 

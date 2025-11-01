@@ -2,16 +2,13 @@ import asyncio
 import logging
 from collections.abc import Iterable
 
-import opik
-import utils.opik_utils as opik_utils
-from clients.sec_client import SECClient
+from api_clients.sec_api_client import SECAPIClient
 from fastmcp import FastMCP
 
-opik_utils.configure()
 logger = logging.getLogger(__name__)
 
 sec_mcp = FastMCP("sec_tools")
-sec_client = SECClient()
+sec_client = SECAPIClient()
 
 
 @sec_mcp.tool(
@@ -19,7 +16,6 @@ sec_client = SECClient()
     tags={"sec", "mapping", "ticker", "cik"},
     annotations={"title": "Map Ticker to CIK", "readOnlyHint": True, "openWorldHint": True},
 )
-@opik.track(name="sec-map-ticker", type="tool")
 async def map_ticker_to_cik(ticker: str):
     try:
         cik = await asyncio.to_thread(sec_client.map_ticker_to_cik, ticker)
@@ -34,7 +30,6 @@ async def map_ticker_to_cik(ticker: str):
     tags={"sec", "filing", "10-K", "metadata"},
     annotations={"title": "Get Latest 10-K Metadata", "readOnlyHint": True, "openWorldHint": True},
 )
-@opik.track(name="sec-latest-10k", type="tool")
 async def get_latest_10k_metadata(ticker: str):
     try:
         cik = await asyncio.to_thread(sec_client.map_ticker_to_cik, ticker)
@@ -52,7 +47,6 @@ async def get_latest_10k_metadata(ticker: str):
     tags={"sec", "filing", "10-K", "text"},
     annotations={"title": "Get Latest 10-K Text", "readOnlyHint": True, "openWorldHint": True},
 )
-@opik.track(name="sec-latest-10k-text", type="tool")
 async def get_latest_10k_text(ticker: str, sections: str | None = None):
     try:
         section_list = _parse_sections(sections)

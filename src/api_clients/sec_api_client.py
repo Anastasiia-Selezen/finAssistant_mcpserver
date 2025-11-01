@@ -7,7 +7,7 @@ from config import settings
 from sec_api import ExtractorApi, MappingApi, QueryApi
 
 
-class SECClient:
+class SECAPIClient:
     """
     Minimal helper class that exposes three SEC API interactions:
       • map_ticker_to_cik      — Map a ticker symbol to its CIK identifier.

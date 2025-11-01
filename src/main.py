@@ -1,6 +1,5 @@
 import anyio
-import utils.opik_utils as opik_utils
-from servers.tool_registry import McpServersRegistry
+from server.tool_registry import McpServersRegistry
 
 
 def main():
@@ -11,5 +10,4 @@ def main():
 
 
 if __name__ == "__main__":
-    opik_utils.configure()
     main()

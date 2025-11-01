@@ -1,10 +1,9 @@
 import logging
 
-import opik
 from fastmcp import FastMCP
-from servers.agent_scope_server import agent_scope_mcp
-from servers.alphavantage_server import alphavantage_mcp
-from servers.sec_server import sec_mcp
+from server.agent_scope import agent_scope_mcp
+from server.alpha_vantage import alphavantage_mcp
+from server.sec import sec_mcp
 
 log = logging.getLogger(__name__)
 
@@ -15,7 +14,6 @@ class McpServersRegistry:
         self.all_tags: set[str] = set()
         self._is_initialized = False
 
-    @opik.track(name="tool-registry-initialize", type="general")
     async def initialize(self):
         if self._is_initialized:
             return

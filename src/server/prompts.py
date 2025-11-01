@@ -1,34 +1,4 @@
-import opik
-from loguru import logger
-
-
-class VersionedPrompt:
-    def __init__(self, name: str, template: str):
-        self.name = name
-        self._opik_prompt = None
-        self._template = template
-        self._init_opik_prompt()
-
-    def _init_opik_prompt(self):
-        try:
-            self._opik_prompt = opik.Prompt(name=self.name, prompt=self._template)
-        except Exception as e:
-            logger.warning(f"Opik prompt versioning unavailable for '{self.name}': {e}. Using local template.")
-            self._opik_prompt = None
-
-    def get(self) -> str:
-        if self._opik_prompt is not None:
-            return self._opik_prompt.prompt
-        return self._template
-
-    def __str__(self):
-        return self.get()
-
-    def __repr__(self):
-        return f"<VersionedPrompt name={self.name}>"
-
-
-_SYSTEM_PROMPT = """
+SYSTEM_PROMPT = """
 You are the lead financial analyst. Your job is to answer the user’s question: {}, by orchestrating MCP tools and keep answers focused and factual.
 
   Available tools
@@ -50,5 +20,3 @@ You are the lead financial analyst. Your job is to answer the user’s question:
 
   Stay professional, transparent, and aligned with the user's intent at all times.
 """
-
-SYSTEM_PROMPT = VersionedPrompt("scope_financial_analysis_prompt", _SYSTEM_PROMPT)

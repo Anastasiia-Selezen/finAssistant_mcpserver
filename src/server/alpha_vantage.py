@@ -1,14 +1,11 @@
 import logging
 from contextlib import AsyncExitStack
 
-import opik
-import utils.opik_utils as opik_utils
 from config import settings
 from fastmcp import FastMCP
 from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 
-opik_utils.configure()
 logger = logging.getLogger("alphavantage_server")
 logging.basicConfig(level=logging.INFO)
 
@@ -27,7 +24,6 @@ alphavantage_mcp = FastMCP("alphavantage_proxy")
     tags={"alphavantage", "time_series", "intraday"},
     annotations={"title": "Get Intraday Time Series", "readOnlyHint": True, "openWorldHint": True},
 )
-@opik.track(name="alphavantage-TIME_SERIES_INTRADAY", type="tool")
 async def get_intraday(symbol: str, interval: str):
     context = streamablehttp_client(SERVER_CONFIG.get("url"))
     async with AsyncExitStack() as exit_stack:
@@ -45,7 +41,6 @@ async def get_intraday(symbol: str, interval: str):
     tags={"alphavantage", "news", "sentiment"},
     annotations={"title": "Get News Sentiment", "readOnlyHint": True, "openWorldHint": True},
 )
-@opik.track(name="alphavantage-NEWS_SENTIMENT", type="tool")
 async def get_news_sentiment(tickers: str, topics: str = None, time_from: str = None, time_to: str = None):
     context = streamablehttp_client(SERVER_CONFIG.get("url"))
     async with AsyncExitStack() as exit_stack:
@@ -71,7 +66,6 @@ async def get_news_sentiment(tickers: str, topics: str = None, time_from: str = 
     tags={"alphavantage", "symbol", "search"},
     annotations={"title": "Search Stock Symbol", "readOnlyHint": True, "openWorldHint": True},
 )
-@opik.track(name="alphavantage-SYMBOL_SEARCH", type="tool")
 async def search_symbol(keywords: str):
     context = streamablehttp_client(SERVER_CONFIG.get("url"))
     async with AsyncExitStack() as exit_stack:
