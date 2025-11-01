@@ -17,14 +17,8 @@ class Settings(BaseSettings):
     # --- SEC Configuration ---
     SEC_API_KEY: str = Field(default="", description="API key for SEC integration.")
 
-    # --- Opik/Comet Configuration ---
-    OPIK_API_KEY: str = Field(default="", description="API key for Opik/Comet integration.")
-    OPIK_PROJECT: str = Field(
-        default="finAssistant_servers",
-        description="Project name for Comet ML and Opik tracking.",
-    )
 
-    @field_validator("ALPHA_VANTAGE_API_KEY", "SEC_API_KEY", "OPIK_API_KEY")
+    @field_validator("ALPHA_VANTAGE_API_KEY", "SEC_API_KEY")
     @classmethod
     def check_not_empty(cls, value: str, info) -> str:
         """
