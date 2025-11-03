@@ -60,4 +60,4 @@ async def load_alpha_vantage_tools() -> None:
     log.info("Alpha Vantage tools ready.")
 
 
-__all__ = ("alphavantage_mcp", "ensure_alpha_vantage_tools")
+__all__ = ("alphavantage_mcp", "load_alpha_vantage_tools")
