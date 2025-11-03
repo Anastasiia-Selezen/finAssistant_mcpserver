@@ -6,6 +6,7 @@ from api_clients.sec_api_client import SECAPIClient
 from fastmcp import FastMCP
 
 logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 sec_mcp = FastMCP("sec_tools")
 sec_client = SECAPIClient()

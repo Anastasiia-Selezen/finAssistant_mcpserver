@@ -2,11 +2,11 @@ import logging
 
 from fastmcp import FastMCP
 from server.agent_scope import agent_scope_mcp
-from server.alpha_vantage import alphavantage_mcp
+from server.alpha_vantage import alphavantage_mcp, load_alpha_vantage_tools
 from server.sec import sec_mcp
 
 log = logging.getLogger(__name__)
-
+logging.basicConfig(level=logging.INFO)
 
 class McpServersRegistry:
     def __init__(self):
@@ -19,7 +19,9 @@ class McpServersRegistry:
             return
 
         log.info("Initializing McpServersRegistry...")
-        await self.registry.import_server(alphavantage_mcp, prefix="alphavantage")
+
+        await load_alpha_vantage_tools()
+        self.registry.mount(alphavantage_mcp, prefix="alphavantage")
         await self.registry.import_server(agent_scope_mcp, prefix="scope")
         await self.registry.import_server(sec_mcp, prefix="sec")
 
