@@ -21,7 +21,8 @@ class McpServersRegistry:
         log.info("Initializing McpServersRegistry...")
 
         await load_alpha_vantage_tools()
-        self.registry.mount(alphavantage_mcp, prefix="alphavantage")
+        #self.registry.mount(alphavantage_mcp, prefix="alphavantage")
+        await self.registry.import_server(alphavantage_mcp, prefix="alphavantage")
         await self.registry.import_server(agent_scope_mcp, prefix="scope")
         await self.registry.import_server(sec_mcp, prefix="sec")
 
